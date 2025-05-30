@@ -1,0 +1,28 @@
+{{#if (hasPackage className)}}
+package {{parsePackageName className}};
+
+{{/if}}
+
+import lombok.{{#if immutable}}Value{{else}}Data{{/if}};
+import lombok.*;
+
+{{#if immutable}}
+@Value
+@AllArgsConstructor
+@Builder
+public class {{parseClassName className}} {
+{{#each fields}}
+    {{#if ../immutable}}private final {{else}}private {{/if}}{{type}} {{name}};
+{{/each}}
+}
+{{else}}
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class {{parseClassName className}} {
+{{#each fields}}
+    private {{type}} {{name}};
+{{/each}}
+}
+{{/if}}
