@@ -1,6 +1,6 @@
 {
-  "name": "CopyUtils",
-  "version": "0.0.1-SNAPSHOT",
+  "name": "copy-utils-generator",
+  "version": "0.0.2-SNAPSHOT",
   "description": "",
   "main": "index.js",
   "scripts": {
