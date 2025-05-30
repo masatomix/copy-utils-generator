@@ -25,8 +25,7 @@ export class MappingFactoryMockImpl implements MappingFactory {
 export function groupMappings(rows: MappingRow[]): ClassGroup[] {
 
     const logger = getLogger('groupMappings')
-    // const classMap = new Map<string, Map<string, MethodGroup>>();
-    const classMap = new Map<string, { decorator?: string; uses?: string; methods: Map<string, MethodGroup> }>();
+    const classMap = new Map<string, { decorator?: string; uses?: string[]; methods: Map<string, MethodGroup> }>();
 
     for (const row of rows) {
         const {
@@ -37,11 +36,12 @@ export function groupMappings(rows: MappingRow[]): ClassGroup[] {
             toClass,
             fromField,
             toField,
-            // decorator = '',
             decorator,
             uses,
             qualifiedByName,
             ignoreByDefault,
+            ignoreColumn,
+            inverse,
         } = row;
 
 
@@ -55,11 +55,20 @@ export function groupMappings(rows: MappingRow[]): ClassGroup[] {
         // }
         // 追加 以上
 
+        const toArray = (input?: string): string[] | undefined => {
+            if (!input) return
+            const result = input
+                .split(/[\n\r,]+/)        // カンマ・改行（\n, \r, \r\n）をすべて区切りとする
+                .map(s => s.trim())       // 各要素の前後空白を除去
+                .filter(s => s.length > 0); // 空文字は除外（不要ならこの行は省略）
+            return result
+        }
+
         if (!classMap.has(className)) {
             classMap.set(className,
                 {
                     decorator,
-                    uses,
+                    uses: toArray(uses),
                     methods: new Map()
                 });
         }
@@ -77,18 +86,23 @@ export function groupMappings(rows: MappingRow[]): ClassGroup[] {
                 fromClass,
                 toClass,
                 ignoreByDefault,
+                inverse,
                 fields: [],
             });
         }
 
-        // 追加(From/Toどっちかがなかったら、フィールド情報はpushしない)
-        if (fromField) {
-            if (toField) {
-                // 追加 以上
-                // biome-ignore lint/style/noNonNullAssertion: <explanation>
-                methodMap.get(methodKey)!.fields.push({ fromField, toField, qualifiedByName });
+        // from/toより、ignoreColumn 優先で適用
+        if (ignoreColumn) {
+            methodMap.get(methodKey)!.fields.push({ ignoreColumn });
+        } else
+            // 追加(From/Toどっちかがなかったら、フィールド情報はpushしない)
+            if (fromField) {
+                if (toField) {
+                    // 追加 以上
+                    // biome-ignore lint/style/noNonNullAssertion: <explanation>
+                    methodMap.get(methodKey)!.fields.push({ fromField, toField, qualifiedByName });
+                }
             }
-        }
     }
 
     // Convert Map to array

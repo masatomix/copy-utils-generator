@@ -12,11 +12,9 @@ import org.mapstruct.BeanMapping;
 import org.mapstruct.DecoratedWith;
 import org.mapstruct.InheritInverseConfiguration;
 
-@Mapper(componentModel = "spring" , unmappedTargetPolicy = ReportingPolicy.WARN 
-{{#if uses}}
-, uses = {{uses}}.class
-{{/if}}
-)
+
+
+@Mapper(componentModel = "spring" , unmappedTargetPolicy = ReportingPolicy.WARN {{#if uses}}, uses = { {{#each uses}}{{this}}.class, {{/each}} }{{/if}} )
 {{#if decorator}}
 @org.mapstruct.DecoratedWith({{decorator}}.class)
 {{/if}}
@@ -32,11 +30,18 @@ public interface {{parseClassName className}} {
      * @return
      */
     {{#each fields}}
-    {{#if qualifiedByName}}
+    {{!-- まずは ignoreColumn 優先で出力 --}}
+      {{#if ignoreColumn}}
+    @Mapping(target = "{{ignoreColumn}}" , ignore = true)
+      {{else}}
+    {{!-- カスタムのメソッドがあれば指定 --}}
+        {{#if qualifiedByName}}
     @Mapping(source = "{{fromField}}", target = "{{toField}}" ,qualifiedByName = "{{qualifiedByName}}")
-    {{else}}
+        {{else}}
+    {{!-- 普通の指定 --}}
     @Mapping(source = "{{fromField}}", target = "{{toField}}")
-    {{/if}}
+        {{/if}}
+      {{/if}}
     {{/each}}
     {{#if ignoreByDefault}}
     @BeanMapping(ignoreByDefault = true)
@@ -49,8 +54,6 @@ public interface {{parseClassName className}} {
     {{fromClass}} {{methodName}}Inverse({{toClass}} source);
     {{/if}}
 
-
-
      /**
      * {{fromClass}} source の各プロパティを{{toClass}} target へコピーする。
      * @Mapping(source = "param1", target = "param2") などで、プロパティ名の関連付けも可能
@@ -59,18 +62,24 @@ public interface {{parseClassName className}} {
      * @return
      */
     {{#each fields}}
-    {{#if qualifiedByName}}
+    {{!-- まずは ignoreColumn 優先で出力 --}}
+      {{#if ignoreColumn}}
+    @Mapping(target = "{{ignoreColumn}}" , ignore = true)
+      {{else}}
+    {{!-- カスタムのメソッドがあれば指定 --}}
+        {{#if qualifiedByName}}
     @Mapping(source = "{{fromField}}", target = "{{toField}}" ,qualifiedByName = "{{qualifiedByName}}")
-    {{else}}
+        {{else}}
+    {{!-- 普通の指定 --}}
     @Mapping(source = "{{fromField}}", target = "{{toField}}")
-    {{/if}}
+        {{/if}}
+      {{/if}}
     {{/each}}
     {{#if ignoreByDefault}}
     @BeanMapping(ignoreByDefault = true)
     {{/if}}
     void {{methodName}}Update({{fromClass}} source, @MappingTarget {{toClass}} target);
 
-    
 
     {{#if inverse}}
     @InheritInverseConfiguration(name = "{{methodName}}Update")
