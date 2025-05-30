@@ -16,16 +16,19 @@ export type MappingRow = {
     decorator?: string;
     uses?: string;
     qualifiedByName?: string;
-    ignoreByDefault?: boolean
+    ignoreByDefault?: boolean;
+    ignoreColumn?: string;
+    inverse?: boolean;
 };
 
 /**
  * フィールドのマッピング情報
  */
 export type FieldGroup = {
-    fromField: string
-    toField: string
+    fromField?: string
+    toField?: string
     qualifiedByName?: string
+    ignoreColumn?: string
 }
 
 /**
@@ -36,6 +39,7 @@ export type MethodGroup = {
     fromClass: string // 引数
     toClass: string //戻り値
     ignoreByDefault?: boolean
+    inverse?: boolean
     fields: FieldGroup[] // マッピングする情報。コレは空配列の可能性はある
 }
 
@@ -45,7 +49,7 @@ export type MethodGroup = {
 export interface ClassGroup extends ClassInfo {
     methods: MethodGroup[]
     decorator?: string
-    uses?: string
+    uses?: string[]
 }
 
 
