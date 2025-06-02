@@ -12,8 +12,8 @@
     "build": "npm run clean && npm run tsc",
     "pack": "npm pack",
     "prepublishOnly": "npm run build",
-    "generate-mapping": "ts-node ./src/presentation/cli-generateMappingClass --src mappingdata.xlsx --output ../MapStructSample1/app/src/main/java/ | npx pino-pretty --ignore pid,hostname --translateTime",
-    "generate-class": "ts-node ./src/presentation/cli-generateClass --src classdata.xlsx --output ../MapStructSample1/app/src/main/java/ | npx pino-pretty --levelFirst --singleLine --ignore pid,hostname --translateTime"
+    "generate-mapping": "ts-node ./src/presentation/cli-generateMappingClass --src mappingdata.xlsx --output output | npx pino-pretty --ignore pid,hostname --translateTime",
+    "generate-class": "ts-node ./src/presentation/cli-generateClass --src classdata.xlsx --output output | npx pino-pretty --levelFirst --singleLine --ignore pid,hostname --translateTime"
   },
   "keywords": [],
   "author": "",
