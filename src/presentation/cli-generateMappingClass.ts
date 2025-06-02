@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import yargs from "yargs"
 import { MappingFactoryMockImpl } from "../domain/mapping-factory"
 import { ConverterHandlebarsImpl } from "../infrastructure/converterHandlebarsImpl"
