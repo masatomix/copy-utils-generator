@@ -1,6 +1,6 @@
 {
   "name": "copy-utils-generator",
-  "version": "0.0.6",
+  "version": "0.0.7-SNAPSHOT",
   "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -16,7 +16,9 @@
     "copy:assets": "cpx \"src/**/*.hbs\" dist",
     "build": "npm-run-all clean tsc copy:assets",
     "pack": "npm pack",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run build",
+    "generate-mapping": "ts-node ./src/presentation/cli-generateMappingClass --src mappingdata.xlsx --output ../MapStructSample1/app/src/main/java/ | npx pino-pretty --ignore pid,hostname --translateTime",
+    "generate-class": "ts-node ./src/presentation/cli-generateClass --src classdata.xlsx --output ../MapStructSample1/app/src/main/java/ | npx pino-pretty --levelFirst --singleLine --ignore pid,hostname --translateTime"
    },
   "keywords": [],
   "author": "",
