@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import yargs from "yargs";
 import { ClassDefinitionFactoryMockImpl } from "../domain/classdefinition-factory";
 import { ClassConverterHandlebarsImpl } from "../infrastructure/classConverterHandlebarsImpl";
