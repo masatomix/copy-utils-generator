@@ -14,16 +14,16 @@ import org.mapstruct.InheritInverseConfiguration;
 
 
 
-@Mapper(componentModel = "spring" , unmappedTargetPolicy = ReportingPolicy.WARN {{#if uses}}, uses = { {{#each uses}}{{this}}.class, {{/each}} }{{/if}} )
+@Mapper(componentModel = "spring" , unmappedTargetPolicy = ReportingPolicy.WARN {{#if uses}}, uses = { {{#each uses}}{{{this}}}.class, {{/each}} }{{/if}} )
 {{#if decorator}}
-@org.mapstruct.DecoratedWith({{decorator}}.class)
+@org.mapstruct.DecoratedWith({{{decorator}}}.class)
 {{/if}}
-public interface {{parseClassName className}} {
+public interface {{{parseClassName className}}} {
 
   {{#each methods}}
   
      /**
-     * source を{{toClass}} クラスへ変換する。
+     * source を{{{toClass}}} クラスへ変換する。
      * @Mapping(source = "param1", target = "param2") などで、プロパティ名の関連付けも可能
      * @BeanMapping(ignoreByDefault = true)とした場合は、プロパティ名一致による自動変換はおこなわない。
      * @param source
@@ -46,16 +46,16 @@ public interface {{parseClassName className}} {
     {{#if ignoreByDefault}}
     @BeanMapping(ignoreByDefault = true)
     {{/if}}
-    {{toClass}} {{methodName}}({{fromClass}} source);
+    {{{toClass}}} {{methodName}}({{{fromClass}}} source);
 
 
     {{#if inverse}}
     @InheritInverseConfiguration(name = "{{methodName}}")
-    {{fromClass}} {{methodName}}Inverse({{toClass}} source);
+    {{{fromClass}}} {{methodName}}Inverse({{{toClass}}} source);
     {{/if}}
 
      /**
-     * {{fromClass}} source の各プロパティを{{toClass}} target へコピーする。
+     * {{{fromClass}}} source の各プロパティを{{{toClass}}} target へコピーする。
      * @Mapping(source = "param1", target = "param2") などで、プロパティ名の関連付けも可能
      * @BeanMapping(ignoreByDefault = true)とした場合は、プロパティ名一致による自動変換はおこなわない。
      * @param source
@@ -78,12 +78,12 @@ public interface {{parseClassName className}} {
     {{#if ignoreByDefault}}
     @BeanMapping(ignoreByDefault = true)
     {{/if}}
-    void {{methodName}}Update({{fromClass}} source, @MappingTarget {{toClass}} target);
+    void {{methodName}}Update({{{fromClass}}} source, @MappingTarget {{{toClass}}} target);
 
 
     {{#if inverse}}
     @InheritInverseConfiguration(name = "{{methodName}}Update")
-    void {{methodName}}UpdateInverse({{toClass}} source, @MappingTarget {{fromClass}} target);
+    void {{methodName}}UpdateInverse({{{toClass}}} source, @MappingTarget {{{fromClass}}} target);
     {{/if}}
   {{/each}}
 }
