@@ -19,11 +19,12 @@
     "prepublishOnly": "npm run build",
     "generate-mapping": "ts-node ./src/presentation/cli-generateMappingClass --src mappingdata.xlsx --output ../MapStructSample1/app/src/main/java/ | npx pino-pretty --ignore pid,hostname --translateTime",
     "generate-class": "ts-node ./src/presentation/cli-generateClass --src classdata.xlsx --output ../MapStructSample1/app/src/main/java/ | npx pino-pretty --levelFirst --singleLine --ignore pid,hostname --translateTime"
-   },
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "config": "^4.0.0",
     "excel-csv-read-write": "^0.2.3",
     "handlebars": "^4.7.8",
     "pino": "^9.7.0",
@@ -31,6 +32,7 @@
     "yargs": "^17.7.2"
   },
   "devDependencies": {
+    "@types/config": "^3.3.5",
     "@types/node": "^22.15.21",
     "@types/xlsx-populate": "github:JanLoebel/types-xlsx-populate",
     "@types/yargs": "^17.0.33",
