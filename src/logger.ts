@@ -1,37 +1,40 @@
-import pino, { type Logger } from 'pino';
+import pino, { Logger } from 'pino';
+import config from 'config';
 
-const isProd = process.env.NODE_ENV === 'production';
+// const isProd = process.env.NODE_ENV === 'production';
 
-
-// 内部でロガーをキャッシュ
+// モジュールごとのロガーをキャッシュ
 const loggers: Record<string, Logger> = {};
-const baseLevel = 'warn'
 
-// モジュールごとのログレベル設定
-const moduleLogLevels: Record<string, pino.LevelWithSilent> = {
-    // MappingFactoryExcelImpl: 'debug',
-    // cli: 'info',
-    // groupMappings: 'debug',
-    // ConverterHandlebarsImpl: 'debug',
-    FileClassRepository: 'info',
-    // GenerateClassUserCase: 'debug',
-    // convertToClassDefinitions: 'debug'
-    GenerateMappingClassUserCase: 'info'
+interface Transport {
+    target: string;
+    options: {
+        translateTime: string;
+        ignore: string;
+        levelFirst: boolean;
+    };
+}
+interface LoggerConfig {
+    level: string;
+    moduleLogLevels: Record<string, pino.LevelWithSilent>;
+    transport?: Transport
+}
+
+// デフォルトの設定(このlibrary標準の動き)
+const defaultLoggerOptions: LoggerConfig = {
+    level: 'warn',
+    moduleLogLevels: {
+        FileClassRepository: 'info',
+        GenerateMappingClassUserCase: 'info'
+    },
+    transport: undefined
 };
 
-// ベースロガー（共通設定）
-const baseLoggerConfig = {
-    transport: !isProd
-        ? {
-            target: 'pino-pretty',
-            options: {
-                translateTime: 'SYS:standard',
-                ignore: 'pid,hostname',
-                levelFirst: true,
-            },
-        }
-        : undefined,
-}
+// 利用者の設定
+const userLoggerConfig: LoggerConfig | {} = config.has('copy-utils-generator-logger') ? config.get('copy-utils-generator-logger') : {};
+const loggerConfig = { ...defaultLoggerOptions, ...userLoggerConfig };
+
+const { transport, moduleLogLevels, level: loglevel } = loggerConfig
 
 /**
  * モジュール名を指定して Logger を取得。
@@ -39,12 +42,12 @@ const baseLoggerConfig = {
  */
 export function getLogger(moduleName: string): Logger {
     if (!loggers[moduleName]) {
-        const level = moduleLogLevels[moduleName] ?? baseLevel;
+        const level = moduleLogLevels[moduleName] ?? loglevel;
         // console.log(`${moduleName}はなかったので${level}で作る`)
         loggers[moduleName] = pino({
             level,
-            transport: baseLoggerConfig.transport
-        }).child({ module: moduleName, level });
+            transport
+        }).child({ module: moduleName });
     }
     return loggers[moduleName];
 }
