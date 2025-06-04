@@ -17,6 +17,7 @@ export interface ClassDefinitionFactory {
  * 
  */
 export class ClassDefinitionFactoryMockImpl implements ClassDefinitionFactory {
+    // eslint-disable-next-line @typescript-eslint/require-await
     public async createClassData(): Promise<ClassDefinition[]> {
         return classDefinitionsMock;
     }

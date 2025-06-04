@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import yargs from "yargs";
-import { ClassDefinitionFactoryMockImpl } from "../domain/classdefinition-factory";
+// import { ClassDefinitionFactoryMockImpl } from "../domain/classdefinition-factory";
 import { ClassConverterHandlebarsImpl } from "../infrastructure/classConverterHandlebarsImpl";
 import { ClassDefinitionFactoryExcelImpl } from "../infrastructure/classDefinitionFactoryExcelImpl";
 import { FileClassRepository } from "../infrastructure/fileClassRepository";
@@ -8,7 +8,7 @@ import { GenerateClassUserCase } from "../usercase/generateClassUserCase";
 import { hideBin } from "yargs/helpers";
 
 
-const main = async () => {
+const main = () => {
     const { excelPath, output } = createArgs()
     // '../MapStructSample/app/src/main/java/';
 

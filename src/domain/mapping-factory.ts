@@ -9,6 +9,7 @@ export interface MappingFactory {
 
 export class MappingFactoryMockImpl implements MappingFactory {
 
+    // eslint-disable-next-line @typescript-eslint/require-await
     public async createMappingData(): Promise<ClassGroup[]> {
         return mock;
     }

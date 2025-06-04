@@ -1,7 +1,7 @@
 import { excel2json } from "excel-csv-read-write";
 import { convertToClassDefinitions, type ClassDefinitionFactory } from "../domain/classdefinition-factory";
 import type { ClassDefinition, MappingRowOfClass } from "../domain/types";
-import { getLogger } from "../logger";
+// import { getLogger } from "../logger";
 
 export class ClassDefinitionFactoryExcelImpl implements ClassDefinitionFactory {
 

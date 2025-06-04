@@ -31,7 +31,7 @@ const defaultLoggerOptions: LoggerConfig = {
 };
 
 // 利用者の設定
-const userLoggerConfig: LoggerConfig | {} = config.has('copy-utils-generator-logger') ? config.get('copy-utils-generator-logger') : {};
+const userLoggerConfig: LoggerConfig | object = config.has('copy-utils-generator-logger') ? config.get('copy-utils-generator-logger') : {};
 const loggerConfig = { ...defaultLoggerOptions, ...userLoggerConfig };
 
 const { transport, moduleLogLevels, level: loglevel } = loggerConfig

@@ -1,13 +1,13 @@
 #!/usr/bin/env node
 import yargs from "yargs"
-import { MappingFactoryMockImpl } from "../domain/mapping-factory"
+// import { MappingFactoryMockImpl } from "../domain/mapping-factory"
 import { ConverterHandlebarsImpl } from "../infrastructure/converterHandlebarsImpl"
 import { FileClassRepository } from "../infrastructure/fileClassRepository"
 import { MappingFactoryExcelImpl } from "../infrastructure/mappingFactoryExcelImpl"
 import { GenerateMappingClassUserCase } from "../usercase/generateMappingClassUserCase"
 import { hideBin } from 'yargs/helpers';
 
-const main = async () => {
+const main =  () => {
     const { excelPath, output: outputPath } = createArgs()
     //'../MapStructSample/app/src/main/java/'
 
