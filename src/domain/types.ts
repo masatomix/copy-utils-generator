@@ -1,5 +1,3 @@
-
-
 // マッピング生成用Type達
 
 /**
@@ -7,19 +5,19 @@
  */
 export type MappingRow = {
     active?: boolean
-    className: string;
-    methodName: string;
-    fromClass: string;
-    toClass: string;
-    fromField?: string;
-    toField?: string;
-    decorator?: string;
-    uses?: string;
-    qualifiedByName?: string;
-    ignoreByDefault?: boolean;
-    ignoreColumn?: string;
-    inverse?: boolean;
-};
+    className: string
+    methodName: string
+    fromClass: string
+    toClass: string
+    fromField?: string
+    toField?: string
+    decorator?: string
+    uses?: string
+    qualifiedByName?: string
+    ignoreByDefault?: boolean
+    ignoreColumn?: string
+    inverse?: boolean
+}
 
 /**
  * フィールドのマッピング情報
@@ -52,43 +50,38 @@ export interface ClassGroup extends ClassInfo {
     uses?: string[]
 }
 
-
-
-
 ////////////////////////////////////////////////////////////////////
 // Class生成用Type達
 /**
  * 行データ
  */
 export type MappingRowOfClass = {
-    active?: boolean,
+    active?: boolean
     className: string
-    type: string,
+    type: string
     fieldName: string
     immutable?: boolean
 }
-
 
 /**
  * クラス情報
  */
 export interface ClassDefinition extends ClassInfo {
-    fields: Field[];
-    immutable: boolean; // @Valueか@Dataかを選ぶ
-};
+    fields: Field[]
+    immutable: boolean // @Valueか@Dataかを選ぶ
+}
 
 /**
  * フィールド情報
  */
 interface Field {
-    type: string;
-    name: string;
-};
-
+    type: string
+    name: string
+}
 
 /**
  * クラス、マッピングとも共通の親インタフェース
  */
 export interface ClassInfo {
-    className: string;
+    className: string
 }
