@@ -1,8 +1,8 @@
-import type { ClassConverter } from "../domain/classConverter"
-import type { ClassDefinitionFactory } from "../domain/classdefinition-factory"
-import type { ClassRepository } from "../domain/classRepository"
-import type { ClassDefinition } from "../domain/types"
-import { getLogger } from "../logger"
+import type { ClassConverter } from '../domain/classConverter'
+import type { ClassDefinitionFactory } from '../domain/classdefinition-factory'
+import type { ClassRepository } from '../domain/classRepository'
+import type { ClassDefinition } from '../domain/types'
+import { getLogger } from '../logger'
 
 export class GenerateClassUserCase {
     private logger = getLogger('GenerateClassUserCase')
@@ -10,10 +10,10 @@ export class GenerateClassUserCase {
     constructor(
         private _factory: ClassDefinitionFactory,
         private _classConverter: ClassConverter,
-        private _classRepository: ClassRepository) { }
+        private _classRepository: ClassRepository
+    ) {}
 
     async execute() {
-
         const instances: ClassDefinition[] = await this._factory.createClassData()
 
         // クラスごとの情報になったので順次処理

@@ -1,22 +1,22 @@
-import pino, { Logger } from 'pino';
-import config from 'config';
+import pino, { Logger } from 'pino'
+import config from 'config'
 
 // const isProd = process.env.NODE_ENV === 'production';
 
 // モジュールごとのロガーをキャッシュ
-const loggers: Record<string, Logger> = {};
+const loggers: Record<string, Logger> = {}
 
 interface Transport {
-    target: string;
+    target: string
     options: {
-        translateTime: string;
-        ignore: string;
-        levelFirst: boolean;
-    };
+        translateTime: string
+        ignore: string
+        levelFirst: boolean
+    }
 }
 interface LoggerConfig {
-    level: string;
-    moduleLogLevels: Record<string, pino.LevelWithSilent>;
+    level: string
+    moduleLogLevels: Record<string, pino.LevelWithSilent>
     transport?: Transport
 }
 
@@ -25,14 +25,16 @@ const defaultLoggerOptions: LoggerConfig = {
     level: 'warn',
     moduleLogLevels: {
         FileClassRepository: 'info',
-        GenerateMappingClassUserCase: 'info'
+        GenerateMappingClassUserCase: 'info',
     },
-    transport: undefined
-};
+    transport: undefined,
+}
 
 // 利用者の設定
-const userLoggerConfig: LoggerConfig | {} = config.has('copy-utils-generator-logger') ? config.get('copy-utils-generator-logger') : {};
-const loggerConfig = { ...defaultLoggerOptions, ...userLoggerConfig };
+const userLoggerConfig: LoggerConfig | object = config.has('copy-utils-generator-logger')
+    ? config.get('copy-utils-generator-logger')
+    : {}
+const loggerConfig = { ...defaultLoggerOptions, ...userLoggerConfig }
 
 const { transport, moduleLogLevels, level: loglevel } = loggerConfig
 
@@ -42,12 +44,12 @@ const { transport, moduleLogLevels, level: loglevel } = loggerConfig
  */
 export function getLogger(moduleName: string): Logger {
     if (!loggers[moduleName]) {
-        const level = moduleLogLevels[moduleName] ?? loglevel;
+        const level = moduleLogLevels[moduleName] ?? loglevel
         // console.log(`${moduleName}はなかったので${level}で作る`)
         loggers[moduleName] = pino({
             level,
-            transport
-        }).child({ module: moduleName });
+            transport,
+        }).child({ module: moduleName })
     }
-    return loggers[moduleName];
+    return loggers[moduleName]
 }

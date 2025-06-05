@@ -1,14 +1,12 @@
-import { excel2json } from "excel-csv-read-write";
-import { groupMappings, type MappingFactory } from "../domain/mapping-factory";
-import type { ClassGroup, MappingRow } from "../domain/types";
-import { getLogger } from "../logger";
-
-
+import { excel2json } from 'excel-csv-read-write'
+import { groupMappings, type MappingFactory } from '../domain/mapping-factory'
+import type { ClassGroup, MappingRow } from '../domain/types'
+// import { getLogger } from "../logger";
 
 export class MappingFactoryExcelImpl implements MappingFactory {
     // private logger = getLogger('MappingFactoryExcelImpl')
 
-    public constructor(private _path: string) { }
+    public constructor(private _path: string) {}
 
     public async createMappingData(): Promise<ClassGroup[]> {
         const mappings = await excel2json(this._path)
@@ -17,5 +15,4 @@ export class MappingFactoryExcelImpl implements MappingFactory {
         const ret = groupMappings(mappings as MappingRow[])
         return ret
     }
-
 }

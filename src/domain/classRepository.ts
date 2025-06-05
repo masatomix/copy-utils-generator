@@ -1,5 +1,5 @@
-import type { ClassInfo } from "./types";
+import type { ClassInfo } from './types'
 
 export interface ClassRepository {
-    save( classInfo: ClassInfo, code: string): void;
+    save(classInfo: ClassInfo, code: string): void
 }
