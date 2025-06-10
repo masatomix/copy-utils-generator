@@ -8,23 +8,21 @@ import { getLogger } from '../logger'
 
 export class ConverterHandlebarsImpl implements ClassConverter {
     private logger = getLogger('ConverterHandlebarsImpl')
+
+    constructor(private _templateSource: string) {}
+
     /**
      * mapping情報から、MapStructのマッピングクラスの文字列を出力する
      * @param mapping
      * @returns
      */
     toStr(mapping: ClassGroup): string {
-        // テンプレートエンジンを使って、コードを作成する
-        const templatePath = path.join(__dirname, 'templates', 'template.hbs')
-
-        // テンプレートを読み込む
-        const templateSource = fs.readFileSync(templatePath, 'utf-8')
         // 関数の登録
         Handlebars.registerHelper('parseClassName', parseClassName)
         Handlebars.registerHelper('parsePackageName', parsePackageName)
         Handlebars.registerHelper('hasPackage', hasPackage)
 
-        const template = Handlebars.compile(templateSource)
+        const template = Handlebars.compile(this._templateSource)
         const result = template(mapping)
 
         this.logger.debug(result)
