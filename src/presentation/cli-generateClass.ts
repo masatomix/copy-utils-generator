@@ -7,16 +7,25 @@ import { FileClassRepository } from '../infrastructure/fileClassRepository'
 import { GenerateClassUserCase } from '../usercase/generateClassUserCase'
 import { hideBin } from 'yargs/helpers'
 
+import path from 'node:path'
+import fs from 'node:fs'
+
 const main = () => {
     const { excelPath, output } = createArgs()
     // '../MapStructSample/app/src/main/java/';
+
+    // テンプレートエンジンを使って、コードを作成する
+    const templatePath = path.join(__dirname, 'templates', 'classTemplate.hbs')
+
+    // テンプレートを読み込む
+    const templateSource = fs.readFileSync(templatePath, 'utf-8')
 
     // const factory = new ClassDefinitionFactoryImpl();
     const factory = new ClassDefinitionFactoryExcelImpl(excelPath)
 
     new GenerateClassUserCase(
         factory,
-        new ClassConverterHandlebarsImpl(),
+        new ClassConverterHandlebarsImpl(templateSource),
         new FileClassRepository(output)
     )
         .execute()

@@ -7,16 +7,25 @@ import { MappingFactoryExcelImpl } from '../infrastructure/mappingFactoryExcelIm
 import { GenerateMappingClassUserCase } from '../usercase/generateMappingClassUserCase'
 import { hideBin } from 'yargs/helpers'
 
+import path from 'node:path'
+import fs from 'node:fs'
+
 const main = () => {
     const { excelPath, output: outputPath } = createArgs()
     //'../MapStructSample/app/src/main/java/'
+
+    // テンプレートエンジンを使って、コードを作成する
+    const templatePath = path.join(__dirname, 'templates', 'template.hbs')
+
+    // テンプレートを読み込む
+    const templateSource = fs.readFileSync(templatePath, 'utf-8')
 
     const factory = new MappingFactoryExcelImpl(excelPath)
     // const factory = new MappingFactoryMockImpl()
 
     new GenerateMappingClassUserCase(
         factory,
-        new ConverterHandlebarsImpl(),
+        new ConverterHandlebarsImpl(templateSource),
         new FileClassRepository(outputPath)
     )
         .execute()

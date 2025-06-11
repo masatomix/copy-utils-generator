@@ -84,6 +84,9 @@ Give a ⭐️ if this project helped you!
 
 
 ## 改訂履歴
+- 0.0.12 他のライブラリからimportして各クラスをつかえるように。
+  - ExcelデータをArrayBufferからもらえるようにした(classDefinitionFactoryExceBufferImpl )。
+  - テンプレートを文字列で渡すように仕様変更。ほか。
 - 0.0.10 ESLintとPrettierによるコードフォーマットを実施(ロジックは変更なし)
 - 0.0.9 ログまわりを整理して、利用者が設定変更できるようにした
 - 0.0.8 MapStructコード生成のテンプレートで、<> などがサニタイズされていたバグを修正

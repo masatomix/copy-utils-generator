@@ -1,9 +1,15 @@
 {
   "name": "copy-utils-generator",
-  "version": "0.0.10",
+  "version": "0.0.12",
   "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "exports": {
+    "./domain": "./dist/domain/index.js",
+    "./infrastructure": "./dist/infrastructure/index.js",
+    "./presentation": "./dist/presentation/index.js",
+    "./usercase": "./dist/usercase/index.js"
+  },
   "bin": {
     "generate-mapping": "./dist/presentation/cli-generateMappingClass.js",
     "generate-class": "./dist/presentation/cli-generateClass.js"
@@ -24,12 +30,19 @@
     "generate-mapping": "ts-node ./src/presentation/cli-generateMappingClass --src mappingdata.xlsx --output ../MapStructSample1/app/src/main/java/ | npx pino-pretty --ignore pid,hostname --translateTime",
     "generate-class": "ts-node ./src/presentation/cli-generateClass --src classdata.xlsx --output ../MapStructSample1/app/src/main/java/ | npx pino-pretty --levelFirst --singleLine --ignore pid,hostname --translateTime"
   },
-  "keywords": [],
-  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/masatomix/copy-utils-generator.git"
+  },
+  "keywords": [
+    "typescript",
+    "javascript"
+  ],
+  "author": "Masatomi KINO <masatomix@ki-no.org> (http://qiita.com/masatomix)",
   "license": "ISC",
   "dependencies": {
     "config": "^4.0.0",
-    "excel-csv-read-write": "^0.2.3",
+    "excel-csv-read-write": "0.2.4",
     "handlebars": "^4.7.8",
     "pino": "^9.7.0",
     "ts-node": "^10.9.2",
