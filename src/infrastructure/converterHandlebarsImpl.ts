@@ -1,7 +1,5 @@
 import Handlebars from 'handlebars'
 import type { ClassGroup } from '../domain/types'
-import path from 'node:path'
-import fs from 'node:fs'
 import { hasPackage, parseClassName, parsePackageName } from './utils'
 import type { ClassConverter } from '../domain/classConverter'
 import { getLogger } from '../logger'
