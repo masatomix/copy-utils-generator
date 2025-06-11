@@ -1,6 +1,6 @@
 {
   "name": "copy-utils-generator",
-  "version": "0.0.12-SNAPSHOT",
+  "version": "0.0.12",
   "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -42,7 +42,7 @@
   "license": "ISC",
   "dependencies": {
     "config": "^4.0.0",
-    "excel-csv-read-write": "0.2.4-SNAPSHOT",
+    "excel-csv-read-write": "0.2.4",
     "handlebars": "^4.7.8",
     "pino": "^9.7.0",
     "ts-node": "^10.9.2",
