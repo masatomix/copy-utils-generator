@@ -22,7 +22,7 @@ const main = () => {
 
     // const factory = new ClassDefinitionFactoryImpl();
     const factory = new ClassDefinitionFactoryExcelImpl(excelPath)
-    
+
     new GenerateClassUserCase(
         factory,
         new ClassConverterHandlebarsImpl(templateSource),
