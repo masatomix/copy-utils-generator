@@ -27,11 +27,16 @@ export function convertToClassDefinitions(rows: MappingRowOfClass[]): ClassDefin
 
     for (const row of rows) {
         const {
+            // デフォルト値が必要な場合はココでセット
             active = true, // 未指定時はtrueにする。
             immutable = false, // 未指定時はfalseにする。
+            className,
             type,
+            fieldName,
+            AllArgsConstructor = true,
+            Builder = true,
         } = row
-        const fqcn = row.className
+        const fqcn = className
 
         if (!active) {
             continue
@@ -41,14 +46,17 @@ export function convertToClassDefinitions(rows: MappingRowOfClass[]): ClassDefin
             classMap.set(fqcn, {
                 className: fqcn,
                 fields: [],
+                // クラス単位はココにプロパティを追加
                 immutable,
+                AllArgsConstructor: Builder ? true : AllArgsConstructor, // BuilderがTrueの場合は、常にTrueにする
+                Builder,
             })
         }
 
         // biome-ignore lint/style/noNonNullAssertion: <explanation>
         classMap.get(fqcn)!.fields.push({
             type,
-            name: row.fieldName,
+            name: fieldName,
         })
     }
 

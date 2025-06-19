@@ -61,6 +61,8 @@ export type MappingRowOfClass = {
     type: string
     fieldName: string
     immutable?: boolean
+    AllArgsConstructor?: boolean
+    Builder?: boolean
 }
 
 /**
@@ -69,6 +71,8 @@ export type MappingRowOfClass = {
 export interface ClassDefinition extends ClassInfo {
     fields: Field[]
     immutable: boolean // @Valueか@Dataかを選ぶ
+    AllArgsConstructor: boolean
+    Builder: boolean
 }
 
 /**
