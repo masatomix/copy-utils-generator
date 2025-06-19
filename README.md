@@ -84,6 +84,10 @@ Give a ⭐️ if this project helped you!
 
 
 ## 改訂履歴
+- 0.0.13 設定ファイルに AllArgsConstructor,Builder の列を追加した。
+  - デフォルトはTRUEにしてあるので、今までの設定ファイルはそのまま同じ結果になる
+  - TRUE/FALSEを設定する事で、それぞれのアノテーションの出力を制御。
+  - ただしBuilderはAllArgsConstructor に依存しているので、Builderが出力される場合はAllArgsConstructorも出力される。
 - 0.0.12 他のライブラリからimportして各クラスをつかえるように。
   - ExcelデータをArrayBufferからもらえるようにした(classDefinitionFactoryExceBufferImpl )。
   - テンプレートを文字列で渡すように仕様変更。ほか。
