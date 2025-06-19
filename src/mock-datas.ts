@@ -50,6 +50,8 @@ export const classDefinitionsMock: ClassDefinition[] = [
     {
         className: 'UserMapper',
         immutable: false, // ← 例: @Data
+        AllArgsConstructor: true,
+        Builder: true, 
         fields: [
             { type: 'java.lang.String', name: 'fullName' },
             { type: 'java.lang.String', name: 'email' },
@@ -62,6 +64,8 @@ export const classDefinitionsMock: ClassDefinition[] = [
     {
         className: 'UserMapper2',
         immutable: true, // ← 例: @Value
+        AllArgsConstructor: true, 
+        Builder: true, 
         fields: [
             { type: 'java.lang.String', name: 'name' },
             { type: 'java.lang.String', name: 'emailAddress' },
