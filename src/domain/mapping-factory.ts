@@ -41,6 +41,7 @@ export function groupMappings(rows: MappingRow[]): ClassGroup[] {
             ignoreByDefault,
             ignoreColumn,
             inverse,
+            updateMethod = true, // 未指定時はtrue
         } = row
 
         if (!active) {
@@ -84,6 +85,7 @@ export function groupMappings(rows: MappingRow[]): ClassGroup[] {
                 toClass,
                 ignoreByDefault,
                 inverse,
+                updateMethod,
                 fields: [],
             })
         }

@@ -1,6 +1,6 @@
 {
   "name": "copy-utils-generator",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "description": "Copy Utilities Generator",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -27,8 +27,8 @@
     "build": "npm-run-all clean tsc copy:assets",
     "pack": "npm pack",
     "prepublishOnly": "npm run build",
-    "generate-mapping": "ts-node ./src/presentation/cli-generateMappingClass --src mappingdata.xlsx --output ../MapStructSample1/app/src/main/java/ | npx pino-pretty --ignore pid,hostname --translateTime",
-    "generate-class": "ts-node ./src/presentation/cli-generateClass --src classdata.xlsx --output ../MapStructSample1/app/src/main/java/ | npx pino-pretty --levelFirst --singleLine --ignore pid,hostname --translateTime"
+    "generate-mapping": "ts-node ./src/presentation/cli-generateMappingClass --excelPath mappingdata.xlsx --output ../MapStructSample1/app/src/main/java/ | npx pino-pretty --ignore pid,hostname --translateTime",
+    "generate-class": "ts-node ./src/presentation/cli-generateClass --excelPath classdata.xlsx --output ../MapStructSample1/app/src/main/java/ | npx pino-pretty --levelFirst --singleLine --ignore pid,hostname --translateTime"
   },
   "repository": {
     "type": "git",
