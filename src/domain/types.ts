@@ -39,7 +39,7 @@ export type MethodGroup = {
     toClass: string //戻り値
     ignoreByDefault?: boolean
     inverse?: boolean
-    updateMethod: boolean 
+    updateMethod: boolean
     fields: FieldGroup[] // マッピングする情報。コレは空配列の可能性はある
 }
 
