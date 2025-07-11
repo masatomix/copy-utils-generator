@@ -1,6 +1,6 @@
 {
   "name": "copy-utils-generator",
-  "version": "0.0.15-SNAPSHOT",
+  "version": "0.0.15",
   "description": "Copy Utilities Generator",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
