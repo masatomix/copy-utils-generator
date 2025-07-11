@@ -84,6 +84,7 @@ Give a ⭐️ if this project helped you!
 
 
 ## 改訂履歴
+- 0.0.15 ヘッダ行の前後スペースを除去するようにした
 - 0.0.14 VOなオブジェクトをTargetにした場合は、xxUpdateは正しく動作しないので(コンパイルエラー)、ExcelファイルにupdateMethod 列(TRUE/FALSE)を追加し、出力を制御できるようにした。
 - 0.0.13 設定ファイルに AllArgsConstructor,Builder の列を追加した。
   - デフォルトはTRUEにしてあるので、今までの設定ファイルはそのまま同じ結果になる
