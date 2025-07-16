@@ -1,6 +1,6 @@
 {
   "name": "copy-utils-generator",
-  "version": "0.0.15",
+  "version": "0.0.16",
   "description": "Copy Utilities Generator",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -42,7 +42,7 @@
   "license": "ISC",
   "dependencies": {
     "config": "^4.0.0",
-    "excel-csv-read-write": "^0.2.5",
+    "excel-csv-read-write": "^0.2.6",
     "handlebars": "^4.7.8",
     "pino": "^9.7.0",
     "yargs": "^17.7.2"
